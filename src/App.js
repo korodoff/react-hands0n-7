@@ -6,6 +6,7 @@ import NavBar from "./component/navBar";
 import Addstudent from "./component/addStudent";
 import Memory from "./component/memory";
 import "./component/style.css";
+import Edit from "./component/Edit";
 function App() {
   return (
     <Memory>
@@ -17,6 +18,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/student" element={<Student />} />
           <Route path="/addstudent" element={<Addstudent />} />
+          <Route path="/Edit/:id" element={<Edit />} />
         </Routes>
       </BrowserRouter>
     </div>
