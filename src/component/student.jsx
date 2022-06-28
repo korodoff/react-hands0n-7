@@ -31,7 +31,7 @@ const Student = () => {
               <td>{student.Course}</td>
               <td>{student.Batch}</td>
               <td>
-                <Link to="/addStudent">Edit</Link>
+                <Link to={`/Edit/${student.id}`}>Edit</Link>
               </td>
             </tr>
           ))}
