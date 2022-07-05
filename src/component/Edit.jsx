@@ -1,9 +1,14 @@
-import React, { useContext } from "react";
-import { data } from "./memory";
+// import React, { useContext } from "react";
+// import { data } from "./memory";
 import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux/es/exports";
+import { UpdateUser } from "../feature/UserSlice";
+import { useSelector } from "react-redux";
 import "./style.css";
 const Edit = () => {
+  const dispatch = useDispatch();
+  const userData = useSelector((state) => state.users);
   const [name, setName] = useState("");
 
   const [age, setAge] = useState("");
@@ -14,7 +19,7 @@ const Edit = () => {
 
   const { id } = useParams();
 
-  const [students, setStudents] = useContext(data);
+  // const [students, setStudents] = userData;
 
   const ChangeHandlerName = (e) => {
     setName(e.target.value);
@@ -29,7 +34,7 @@ const Edit = () => {
     setBatch(e.target.value);
   };
   useEffect(() => {
-    students.forEach((element) => {
+    userData.forEach((element) => {
       if (element.id === id) {
         setName(element.Name);
         setAge(element.Age);
@@ -37,21 +42,18 @@ const Edit = () => {
         setBatch(element.Batch);
       }
     });
-  }, [id, students]);
+  }, [id, userData]);
 
-  const SubmitHandler = () => {
-    setStudents((previousV) =>
-      previousV.map((data) =>
-        data.id === id
-          ? {
-              id: id,
-              Name: name,
-              Age: age,
-              Batch: batch,
-              Course: course,
-            }
-          : data
-      )
+  const SubmitHandler = (e) => {
+    // e.preventDefault();
+    dispatch(
+      UpdateUser({
+        Name: name,
+        Age: age,
+        Course: course,
+        Batch: batch,
+        id: id,
+      })
     );
   };
   return (

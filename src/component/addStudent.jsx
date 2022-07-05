@@ -1,8 +1,10 @@
-import React, { useContext } from "react";
-import { data } from "./memory";
+// import React, { useContext } from "react";
+// import { data } from "./memory";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import "./style.css";
+import { addStudent } from "../feature/UserSlice";
+import { useDispatch } from "react-redux/es/exports";
 const AddStudent = () => {
   const [Name, setName] = useState("");
 
@@ -12,7 +14,8 @@ const AddStudent = () => {
 
   const [Batch, setBatch] = useState("");
 
-  const [students, setStudents] = useContext(data);
+  // const [students, setStudents] = useContext(data);
+  const dispatch = useDispatch();
 
   const ChangeHandlerName = (e) => {
     setName(e.target.value);
@@ -27,17 +30,26 @@ const AddStudent = () => {
     setBatch(e.target.value);
   };
 
-  const SubmitHandler = () => {
-    setStudents([
-      ...students,
-      {
+  const SubmitHandler = (e) => {
+    dispatch(
+      addStudent({
         Name: Name,
         Age: Age,
         Course: Course,
         Batch: Batch,
         id: new Date().getTime().toString(),
-      },
-    ]);
+      })
+    );
+    // setStudents([
+    //   ...students,
+    //   {
+    //     Name: Name,
+    //     Age: Age,
+    //     Course: Course,
+    //     Batch: Batch,
+    //     id: new Date().getTime().toString(),
+    //   },
+    // ]);
   };
   return (
     <div>

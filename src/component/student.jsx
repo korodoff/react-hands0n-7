@@ -1,9 +1,13 @@
-import React, { useContext } from "react";
+// import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { data } from "./memory";
+// import { data } from "./memory";
+import { useSelector } from "react-redux";
+// import { AddUser } from "../feature/UserSlice";
 
 const Student = () => {
-  const [student] = useContext(data);
+  // const [student] = useContext(data);
+  const datas = useSelector((state) => state.users);
+  console.log(datas);
   return (
     <div>
       <div>
@@ -24,7 +28,7 @@ const Student = () => {
         </thead>
 
         <tbody>
-          {student.map((student) => (
+          {datas.map((student) => (
             <tr key={student.id}>
               <td>{student.Name}</td>
               <td>{student.Age}</td>
